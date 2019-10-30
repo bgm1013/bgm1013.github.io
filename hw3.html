@@ -13,20 +13,20 @@
       function readFile() {
         filename = "data1.csv";
         $.get(filename, function(csvString) {
-          // read a .csv file and save the data in arrayData variable
+          
           var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
-          // send arrayData to 'draw' function
+          
           drawChart(arrayData)
         });
       };
 
       
-      function drawChart() {
+      function drawChart(arrayData) {
         var data = new google.visualization.arrayToDataTable(arrayData);
           
 
         var options = {
-          title: 'Indian Language Use',
+          title: 'proportion of borrowings by subject',
           legend: 'none',
           pieSliceText: 'label',
           slices: {  4: {offset: 0.2},

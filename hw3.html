@@ -1,0 +1,55 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="jquery-csv.js"></script>
+
+    <script type="text/javascript">
+      google.charts.load('current', {
+        packages: ['corechart', 'line']
+      });
+      google.charts.setOnLoadCallback(readFile); 
+
+      function readFile() {
+        filename = "data1.csv";
+        $.get(filename, function(csvString) {
+          // read a .csv file and save the data in arrayData variable
+          var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
+          // send arrayData to 'draw' function
+          draw(arrayData)
+        });
+      };
+
+      
+      function drawChart() {
+        var data = new google.visualization.arrayToDataTable(arrayData);
+          
+
+        var options = {
+          title: 'Proportion of Borrowings in Pohang Southern district Library',
+          legend: 'none',
+          pieSliceText: 'label',
+          slices: {  4: {offset: 0.2},
+                    12: {offset: 0.3},
+                    14: {offset: 0.4},
+                    15: {offset: 0.5},
+          },
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="introduction" style="max-width: 800px; font-family: Verdana, Dotum; margin: auto; padding-bottom: 30px"> 
+      <h1>Pohang southern district library borrowings</h1> 
+     <p>date: 2019-10-30</p> 
+     <p>name: Han Sunwoo (21600755)</p> 
+     <p>Introduction: This chart shows the proportion of borrowings by subject in South District, Pohang, in 2018.</p> 
+     <p>Data: The data is proportion of borrowings by subject in the library. </p> 
+     <p>Source code of this page: https://www.data4library.kr/regionThema<p> 
+    </div> 
+    <div id="piechart" style="width: 1500px; height: 600px;"></div>
+  </body>
+</html>

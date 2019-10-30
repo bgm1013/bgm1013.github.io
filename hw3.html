@@ -16,7 +16,7 @@
           // read a .csv file and save the data in arrayData variable
           var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
           // send arrayData to 'draw' function
-          draw(arrayData)
+          drawChart(arrayData)
         });
       };
 
@@ -26,7 +26,7 @@
           
 
         var options = {
-          title: 'Proportion of Borrowings in Pohang Southern district Library',
+          title: 'Indian Language Use',
           legend: 'none',
           pieSliceText: 'label',
           slices: {  4: {offset: 0.2},

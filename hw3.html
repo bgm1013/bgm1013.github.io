@@ -2,23 +2,21 @@
 <html>
   <head>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <script type="text/javascript">
-    google.charts.load('current', {packages: ['corechart']});
-    google.charts.setOnLoadCallback(readFile); </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="jquery-csv.js"></script>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"> </script>
-    <script src="jquery-csv.js"></script> 
-
+    <script type="text/javascript">
+      google.charts.load('current', {
+        packages: ['corechart', 'line']
+      });
+      google.charts.setOnLoadCallback(readFile); 
       function readFile() {
-        filename = "data1.csv";
+        filename = "data.csv";
         $.get(filename, function(csvString) {
-          
           var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
-          
           drawChart(arrayData)
         });
       };
-
       
       function drawChart(arrayData) {
         var data = new google.visualization.arrayToDataTable(arrayData);

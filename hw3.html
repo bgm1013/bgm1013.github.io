@@ -12,7 +12,7 @@
       
       google.charts.setOnLoadCallback(readFile);
       function readFile() {
-        filename = "data.csv";
+        filename = "data1.csv";
         $.get(filename, function(csvString) {
          
           var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});

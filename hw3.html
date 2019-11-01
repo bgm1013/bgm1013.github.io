@@ -1,39 +1,51 @@
+
 <!DOCTYPE html>
 <html>
   <head>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="jquery-csv.js"></script>
-
-    <script type="text/javascript"> 
+    
+    <script type="text/javascript">
       google.charts.load('current', {
-        packages: ['corechart', 'line']
+        'packages':['corechart','line']
       });
-      google.charts.setOnLoadCallback(readFile); 
-
+      //google.charts.setOnLoadCallback(drawChart);
+      google.charts.setOnLoadCallback(readFile); // (1) when the javascript is read, readFile function is launched first.
+ // (2) file is read, and the data is saved in arrayData
+      // arrayData variable is sent to the function called 'draw'
       function readFile() {
         filename = "data.csv";
         $.get(filename, function(csvString) {
-          
+         // read a .csv file and save the data in arrayData variable
           var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
-          
+          // send arrayData to 'draw' function
           draw(arrayData)
         });
       };
       function draw(arrayData) {
-        
+  // (3) convert arrayData into DataTable form
         var data = new google.visualization.arrayToDataTable(arrayData);
+        
+        
         var options = {
-          title: 'proportion of borrowings by subject',
-          legend: 'none',
-          pieSliceText: 'label',
-          slices: {  4: {offset: 0.2},
-                    12: {offset: 0.3},
-                    14: {offset: 0.4},
-                    15: {offset: 0.5},
+    width:900,
+    height:400,
+          title: 'Zoo in Geumgang Natural Recreation Forest',
+    slices: {  1: {offset: 0.1}, //make exploding 4 slices
+                       2: {offset: 0.1},
+                           5: {offset: 0.05},
+         3: {offset: 0.1},
           },
-        };
-      
+    //change colors for pie
+    colors: ['DarkGray', 'Black', 'SaddleBrown', 'LightSteelBlue', 'Goldenrod','Dimgray'],
+    pieSliceText: 'value', //make slice text and percentage together 
+    sliceVisibilityThreshold :0,
+    fontSize: 17,
+    legend: {
+       position: 'labeled'
+    },
+    };
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
         chart.draw(data, options);
       }

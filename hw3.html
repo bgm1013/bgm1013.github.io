@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
   <head>
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
@@ -6,12 +7,12 @@
 
     <script type="text/javascript">
       google.charts.load('current', {
-        packages: ['corechart']
+        packages: ['corechart', 'line']
       });
       google.charts.setOnLoadCallback(readFile); 
 
       function readFile() {
-        filename = "data1.csv";
+        filename = "data.csv";
         $.get(filename, function(csvString) {
           
           var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});

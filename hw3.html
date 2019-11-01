@@ -9,21 +9,19 @@
       google.charts.load('current', {
         'packages':['corechart','line']
       });
-      //google.charts.setOnLoadCallback(drawChart);
-      google.charts.setOnLoadCallback(readFile); // (1) when the javascript is read, readFile function is launched first.
- // (2) file is read, and the data is saved in arrayData
-      // arrayData variable is sent to the function called 'draw'
+      
+      google.charts.setOnLoadCallback(readFile);
       function readFile() {
         filename = "data.csv";
         $.get(filename, function(csvString) {
-         // read a .csv file and save the data in arrayData variable
+         
           var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
           // send arrayData to 'draw' function
           draw(arrayData)
         });
       };
       function draw(arrayData) {
-  // (3) convert arrayData into DataTable form
+  
         var data = new google.visualization.arrayToDataTable(arrayData);
         
         
@@ -38,9 +36,9 @@
           },
     
     colors: ['Red', 'Black', 'Pink', 'Yellow', 'Green','Skyblue'],
-    pieSliceText: 'value', //make slice text and percentage together 
+    pieSliceText: 'value',
     sliceVisibilityThreshold :0,
-    fontSize: 17,
+    fontSize: 15,
     legend: {
        position: 'labeled'
     },

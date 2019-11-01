@@ -7,22 +7,23 @@
 
     <script type="text/javascript">
       google.charts.load('current', {
-        packages: ['corechart']
+        packages: ['corechart', 'line']
       });
       google.charts.setOnLoadCallback(readFile); 
-
+      
       function readFile() {
         filename = "data1.csv";
         $.get(filename, function(csvString) {
-          
           var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
-          
-          draw(arrayData)
+          drawChart(arrayData)
         });
       };
-      function draw(arrayData) {
-        
+      
+      function drawChart(arrayData) {
         var data = new google.visualization.arrayToDataTable(arrayData);
+        var csv = require('data1.csv')
+          
+
         var options = {
           title: 'proportion of borrowings by subject',
           legend: 'none',
@@ -33,7 +34,7 @@
                     15: {offset: 0.5},
           },
         };
-      
+
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
         chart.draw(data, options);
       }

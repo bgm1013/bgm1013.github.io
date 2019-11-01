@@ -13,9 +13,9 @@
       function readFile() {
         filename = "data.csv";
         $.get(filename, function(csvString) {
-          // read a .csv file and save the data in arrayData variable
+         
           var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
-          // send arrayData to 'draw' function
+          
           drawChart(arrayData)
         });
       };
@@ -24,7 +24,7 @@
        
         var data = new google.visualization.arrayToDataTable(arrayData);
         var options = {
-          title: 'The state of the number of nations which contact RTA ',
+          title: '2018 Pohang southern district New books Count ',
           legend: 'none',
           pieSliceText: 'label',
           slices: {  4: {offset: 0.2},

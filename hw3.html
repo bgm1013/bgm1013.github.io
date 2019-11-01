@@ -5,19 +5,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="jquery-csv.js"></script>
 
-    <script type="text/javascript">
-$.ajax({
-    url: '//www.google.com/jsapi',
-    dataType: 'script',
-    cache: true,
-    success: function() {
-        google.load('visualization', '1', {
-            'packages': ['corechart'],
-            'callback': drawChart
-        });
-    }
-});
-</script>
+    <script type="text/javascript"> 
       google.charts.load('current', {
         packages: ['corechart', 'line']
       });

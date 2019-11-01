@@ -4,38 +4,36 @@
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="jquery-csv.js"></script>
-    
+
     <script type="text/javascript">
       google.charts.load('current', {
-        'packages':['corechart','line']
+        packages: ['corechart']
       });
-      
       google.charts.setOnLoadCallback(readFile);
       function readFile() {
-        filename = "data1.csv";
+        filename = "data.csv";
         $.get(filename, function(csvString) {
-         
+          // read a .csv file and save the data in arrayData variable
           var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
           // send arrayData to 'draw' function
-          draw(arrayData)
+          drawChart(arrayData)
         });
       };
-      function draw(arrayData) {
-  
+      google.charts.setOnLoadCallback(drawChart); 
+      function drawChart(arrayData) {
+       
         var data = new google.visualization.arrayToDataTable(arrayData);
-        
-        
         var options = {
-    width:900,
-    height:400,
-          title: 'proportion of borrowings by subject',
-              slices: { 1: {offset: 0.1}, 
-                        2: {offset: 0.1},
-                        5: {offset: 0.05},
-                        3: {offset: 0.1},
+          title: 'The state of the number of nations which contact RTA ',
+          legend: 'none',
+          pieSliceText: 'label',
+          slices: {  4: {offset: 0.2},
+                    12: {offset: 0.3},
+                    14: {offset: 0.4},
+                    15: {offset: 0.5},
           },
-    
-
+        };
+      
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
         chart.draw(data, options);
       }

@@ -14,8 +14,8 @@
       });
       google.charts.setOnLoadCallback(readFile);
 
-      ffunction readFile() {
-        filename = "data.csv";
+      function readFile() {
+        filename = "data2.csv";
         $.get(filename, function(csvString) {
          
           var arrayData = $.csv.toArrays(csvString, {onParseValue: $.csv.hooks.castToScalar});
@@ -24,7 +24,7 @@
         });
       };
       google.charts.setOnLoadCallback(drawChart); 
-      
+
       function drawChart(arrayData) {
        
         var data = new google.visualization.arrayToDataTable(arrayData);
